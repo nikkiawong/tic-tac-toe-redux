@@ -12,7 +12,8 @@ function Square(props) {
 }
 
 class Board extends React.Component {
-  renderSquare(i) {
+  renderSquare(i) { //
+    console.log(this.props);
     return <Square value={this.props.squares[i]}
     onClick={() => this.props.onClick(i)}/>;
   }
@@ -69,12 +70,12 @@ class Game extends React.Component {
     });
   }
 
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0,
-    });
-  }
+  // jumpTo(step) {
+  //   this.setState({
+  //     stepNumber: step,
+  //     xIsNext: (step % 2) === 0,
+  //   });
+  // }
 
   render() {
     const history = this.state.history;
