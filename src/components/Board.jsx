@@ -1,9 +1,9 @@
 import React from 'react';
 import Square from './Square';
+import { connect } from 'react-redux';
 
 class Board extends React.Component {
-  renderSquare(i) { //
-    console.log(this.props);
+  renderSquare(i) {
     return <Square value={this.props.squares[i]}
     onClick={() => this.props.onClick(i)}/>;
   }
@@ -37,4 +37,4 @@ class Board extends React.Component {
   }
 }
 
-export default Board;
+export default connect()(Board);

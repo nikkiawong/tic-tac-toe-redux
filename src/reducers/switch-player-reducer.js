@@ -1,10 +1,11 @@
 export default(state = {}, action) => {
   switch (action.type){
-    let xIsNext;
     case 'SWITCH_PLAYER':
-      xIsNext ? 'X' : 'O';
-      return action.xIsNext;
+      let xIsNext = true;
+      xIsNext = !action.xIsNext;
+      console.log(xIsNext);
+      return xIsNext;
     default:
-      return true;
+      return state;
   }
 };

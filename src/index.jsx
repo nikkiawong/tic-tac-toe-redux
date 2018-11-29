@@ -5,20 +5,20 @@ import { HashRouter } from 'react-router-dom';
 import App from './components/App';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
+import switchPlayerReducer from './reducers/switch-player-reducer';
 
-// const store = createStore(reducer);
+const store = createStore(switchPlayerReducer);
 
 const render = (Component) => {
   ReactDom.render(
-    <AppContainer>
-      <HashRouter>
+    <HashRouter>
+      <Provider store={store}>
         <Component />
-      </HashRouter>
-    </AppContainer>,
+      </Provider>
+    </HashRouter>,
     document.getElementById('react-app-root')
   );
 };
-
 
 render(App);
 // /*eslint-disable */
