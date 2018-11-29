@@ -3,24 +3,27 @@ import Board from './Board';
 import { connect } from 'react-redux';
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      history: [{
-        squares: Array(9).fill(null),
-      }],
-      stepNumber: 0,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     history: [{
+  //       squares: Array(9).fill(null),
+  //     }],
+  //     stepNumber: 0,
+  //   };
+  // }
 
   handleClick(i) { //being called successfully, i = the square clicked
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    // console.log(this.props.defaultState);
+    console.log(this.props);
+    const history = this.props.history.slice(0, this.props.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     // if (calculateWinner(squares) || squares[i]) {
     //   return;
     // }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = this.props.xIsNext ? 'X' : 'O'; // this is trying to find xIsNext in this constructor vs the store
+    console.log(this.props.xIsNext);
     const { dispatch } = this.props;
     const action = {
       type: 'SWITCH_PLAYER',
@@ -43,9 +46,9 @@ class Game extends React.Component {
   //   });
   // }
 
-  render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
+  render(props) {
+    const history = this.props.history;
+    const current = history[this.props.stepNumber];
     // const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
@@ -80,18 +83,18 @@ class Game extends React.Component {
             .game-info {
               margin-left: 20px;
             }`}</style>
-            <div className="game">
-              <div className="game-board">
-                <Board
-                  squares={current.squares}
-                  onClick={(i) => this.handleClick(i)}
-                  />
-              </div>
-              <div className="game-info">
-                <div>{status}</div>
-                <ol>{moves}</ol>
-              </div>
-            </div>
+        <div className="game">
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <div>{status}</div>
+            <ol>{moves}</ol>
+          </div>
+        </div>
       </div>
     );
   }
@@ -117,4 +120,12 @@ class Game extends React.Component {
 //   return null;
 // }
 
-export default connect()(Game);
+const mapStateToProps = state => {
+  return {
+    history: state.history,
+    stepNumber: state.stepNumber,
+    xISNext: state.xIsNext
+  };
+};
+
+export default connect(mapStateToProps)(Game);

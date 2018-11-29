@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 class Board extends React.Component {
   renderSquare(i) {
+    // onClick getting called successfully
     return <Square value={this.props.squares[i]}
-    onClick={() => this.props.onClick(i)}/>;
+      onClick={() => this.props.onClick(i)}/>;
   }
 
   render() {
