@@ -3,22 +3,13 @@ import Board from './Board';
 import { connect } from 'react-redux';
 
 class Game extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     history: [{
-  //       squares: Array(9).fill(null),
-  //     }],
-  //     stepNumber: 0,
-  //   };
-  // }
 
   handleClick(i) { //being called successfully, i = the square clicked
     // console.log(this.props.defaultState);
-    console.log(this.props);
     const history = this.props.history.slice(0, this.props.stepNumber + 1);
     const current = history[history.length - 1];
-    const squares = current.squares.slice();
+    console.log(history   );
+    const squares = current.slice();
     // if (calculateWinner(squares) || squares[i]) {
     //   return;
     // }
@@ -30,13 +21,6 @@ class Game extends React.Component {
       xIsNext: true
     };
     dispatch(action);
-    // this.setState({
-    //   history: history.concat([{
-    //     squares: squares,
-    //   }]),
-    //   stepNumber: history.length,
-    //   xIsNext: !this.state.xIsNext,
-    // });
   }
 
   // jumpTo(step) {
@@ -86,7 +70,7 @@ class Game extends React.Component {
         <div className="game">
           <div className="game-board">
             <Board
-              squares={current.squares}
+              squares={current}
               onClick={(i) => this.handleClick(i)}
             />
           </div>

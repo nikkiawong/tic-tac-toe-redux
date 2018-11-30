@@ -1,7 +1,5 @@
 const defaultState = {
-  history: [{
-    squares: Array(9).fill(null),
-  }],
+  history: [null, null, null, null, null, null, null, null, null],
   stepNumber: 0,
   xIsNext: true,
 };
